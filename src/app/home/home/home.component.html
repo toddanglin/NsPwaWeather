@@ -1,0 +1,14 @@
+<header class="header">
+  <h1 class="header__title">{{ title }}</h1>
+  <button id="butRefresh" class="headerButton" aria-label="Refresh" (click)="refreshForecast()"></button>
+  <button id="butAdd" class="headerButton" aria-label="Add" (click)="showPicker(cityPicker)"></button>
+</header>
+
+<main class="main" #main>
+  <div *ngFor="let forecast of forecasts">
+    <app-weather-card [forecast]="forecast"></app-weather-card>
+  </div>
+</main>
+
+<app-city-picker #cityPicker (closePicker)="hidePicker()"></app-city-picker>
+<app-spinner [isBusy]="isBusy"></app-spinner>
