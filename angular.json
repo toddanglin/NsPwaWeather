@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "NsPwaWeather"
+  "defaultProject": "NsPwaWeather",
+  "cli": {
+    "defaultCollection": "@nativescript/schematics"
+  }
 }

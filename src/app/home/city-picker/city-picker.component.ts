@@ -48,14 +48,19 @@ export class CityPickerComponent implements OnInit {
       return;
     }
 
-    let selectedCities = JSON.parse(localStorage.getItem('selectedCities'));
+    let selectedCities: Array<any>;
+    if (localStorage !== undefined) {
+      selectedCities = JSON.parse(localStorage.getItem('selectedCities'));
+    }
     if (selectedCities === null) {
       selectedCities = new Array<any>();
     }
 
     selectedCities.push({ key: this.selectedCity.id, label: this.selectedCity.title});
 
-    localStorage.setItem('selectedCities', JSON.stringify(selectedCities));
+    if(localStorage !== undefined) {
+      localStorage.setItem('selectedCities', JSON.stringify(selectedCities));
+    }
 
     this.hide();
   }

@@ -42,7 +42,9 @@ export class HomeComponent implements OnInit {
       ];
 
       // Save default city on first load
-      localStorage.setItem('selectedCities', JSON.stringify(this.cities));
+      if (localStorage !== undefined){
+        localStorage.setItem('selectedCities', JSON.stringify(this.cities));
+      }
     }
 
     // Using timeout to address race condition with activity indicator in {N}

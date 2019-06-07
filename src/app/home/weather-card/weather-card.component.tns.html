@@ -1,0 +1,47 @@
+<StackLayout>
+  <Label text="WeatherCardComponent works" textWrap="true"></Label>
+  <Label text="This is a migrated component" textWrap="true"></Label>
+  <Label text="Update it to provide the UI elements required in your mobile app" textWrap="true"></Label>
+</StackLayout>
+
+<!--
+Original Web template:
+
+<div class="card weather-forecast" #cardTemplate>
+  <div class="city-key" hidden>{{ forecast.key }}</div>
+  <div class="card-last-updated" hidden>{{ forecast.created }}</div>
+  <div class="location">{{ forecast.label }}</div>
+  <div class="date">{{ forecast.currently.time * 1000 | date }}</div>
+  <div class="description">{{ forecast.currently.summary }}</div>
+  <div class="current">
+    <div class="visual">
+      <div [className]="'icon ' + forecast.currently.icon"></div>
+      <div class="temperature">
+        <span class="value">{{ forecast.currently.temperature | number:'1.0-0' }}</span><span class="scale">°F</span>
+      </div>
+    </div>
+    <div class="description">
+      <div class="humidity">{{ forecast.currently.humidity * 100 | number:'1.0-0' }} %</div>
+      <div class="wind">
+        <span class="value">{{ forecast.currently.windSpeed | number:'1.0-0' }}</span>
+        <span class="scale"> mph </span>
+        <span class="direction">{{ forecast.currently.windBearing }}</span>°
+      </div>
+      <div class="sunrise">{{ forecast.daily.data[0].sunriseTime * 1000 | date:'shortTime' }}</div>
+      <div class="sunset">{{ forecast.daily.data[0].sunsetTime * 1000 | date:'shortTime' }}</div>
+    </div>
+  </div>
+  <div class="future">
+    <div class="oneday" *ngFor="let daily of forecast.daily.data | slice:1:7; let i=index">
+      <div class="date">{{ daily.time * 1000 | date:'EEE' }}</div>
+      <div [className]="'icon ' + daily.icon"></div>
+      <div class="temp-high">
+        <span class="value">{{ daily.temperatureHigh | number:'1.0-0' }}</span>°
+      </div>
+      <div class="temp-low">
+        <span class="value">{{ daily.temperatureLow | number:'1.0-0' }}</span>°
+      </div>
+    </div>
+  </div>
+</div>
+-->

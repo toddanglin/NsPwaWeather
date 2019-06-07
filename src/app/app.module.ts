@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
 
-import { ForecastService } from './forecast.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { sharedProviders } from './app.common';
+
 
 
 @NgModule({
@@ -19,11 +19,10 @@ import { environment } from '../environments/environment';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    HomeModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    ForecastService
+    ...sharedProviders
   ],
   bootstrap: [AppComponent]
 })
