@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WeatherCardComponent implements OnInit {
   @Input() public forecast: any;
-  
+
   constructor() { }
 
   ngOnInit() {

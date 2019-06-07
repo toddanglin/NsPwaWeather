@@ -2,35 +2,35 @@
   <div class="city-key" hidden>{{ forecast.key }}</div>
   <div class="card-last-updated" hidden>{{ forecast.created }}</div>
   <div class="location">{{ forecast.label }}</div>
-  <div class="date">{{ forecast.channel.item.condition.date }}</div>
-  <div class="description">{{ forecast.channel.item.condition.text }}</div>
+  <div class="date">{{ forecast.currently.time * 1000 | date }}</div>
+  <div class="description">{{ forecast.currently.summary }}</div>
   <div class="current">
     <div class="visual">
-      <div [className]="'icon ' + (forecast.channel.item.condition.code | weatherIcon)"></div>
+      <div [className]="'icon ' + forecast.currently.icon"></div>
       <div class="temperature">
-        <span class="value">{{ forecast.channel.item.condition.temp | number }}</span><span class="scale">°F</span>
+        <span class="value">{{ forecast.currently.temperature | number:'1.0-0' }}</span><span class="scale">°F</span>
       </div>
     </div>
     <div class="description">
-      <div class="humidity">{{ forecast.channel.atmosphere.humidity | number }} %</div>
+      <div class="humidity">{{ forecast.currently.humidity * 100 | number:'1.0-0' }} %</div>
       <div class="wind">
-        <span class="value">{{ forecast.channel.wind.speed | number }}</span>
-        <span class="scale">mph</span>
-        <span class="direction">{{ forecast.channel.wind.direction }}</span>°
+        <span class="value">{{ forecast.currently.windSpeed | number:'1.0-0' }}</span>
+        <span class="scale"> mph </span>
+        <span class="direction">{{ forecast.currently.windBearing }}</span>°
       </div>
-      <div class="sunrise">{{ forecast.channel.astronomy.sunrise }}</div>
-      <div class="sunset">{{ forecast.channel.astronomy.sunset }}</div>
+      <div class="sunrise">{{ forecast.daily.data[0].sunriseTime * 1000 | date:'shortTime' }}</div>
+      <div class="sunset">{{ forecast.daily.data[0].sunsetTime * 1000 | date:'shortTime' }}</div>
     </div>
   </div>
   <div class="future">
-    <div class="oneday" *ngFor="let daily of forecast.channel.item.forecast | slice:0:7; let i=index">
-      <div class="date">{{ daily.day }}</div>
-      <div [className]="'icon ' + (daily.code | weatherIcon)"></div>
+    <div class="oneday" *ngFor="let daily of forecast.daily.data | slice:1:7; let i=index">
+      <div class="date">{{ daily.time * 1000 | date:'EEE' }}</div>
+      <div [className]="'icon ' + daily.icon"></div>
       <div class="temp-high">
-        <span class="value">{{ daily.high | number }}</span>°
+        <span class="value">{{ daily.temperatureHigh | number:'1.0-0' }}</span>°
       </div>
       <div class="temp-low">
-        <span class="value">{{ daily.low | number }}</span>°
+        <span class="value">{{ daily.temperatureLow | number:'1.0-0' }}</span>°
       </div>
     </div>
   </div>
