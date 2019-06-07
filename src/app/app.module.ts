@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 
 import { ForecastService } from './forecast.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { ForecastService } from './forecast.service';
     HttpClientModule,
     AppRoutingModule,
     HomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     ForecastService
