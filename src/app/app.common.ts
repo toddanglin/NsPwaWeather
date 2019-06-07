@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ForecastService } from './forecast.service';
+import { CacheService } from './cache.service';
 
 export const routes: Routes = [
     {
@@ -14,5 +15,6 @@ export const routes: Routes = [
 ]
 
 export const sharedProviders: any[] = [
-    ForecastService
+    ForecastService,
+    CacheService
 ]
