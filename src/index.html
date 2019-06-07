@@ -7,8 +7,19 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2F3BA2"/> 
 </head>
 <body>
   <app-root></app-root>
+
+  <noscript>Please enable JavaScript to continue using this app. Thanks.</noscript>
+  <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('./service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
+  }</script>
 </body>
 </html>
