@@ -1,0 +1,18 @@
+<ActionBar title="{{ title }}" icon="" class="action-bar">
+  <ActionItem ios.position="right" (tap)="showPicker(cityPicker)">
+      <Button [text]="'ion-ios-plus-outline' | fonticon" style="font-size:30;" class="ion"></Button>
+  </ActionItem>
+  <ActionItem ios.position="right" (tap)="refreshForecast()">
+      <Button [text]="'fa-sync' | fonticon" style="font-size:30;" class="fa"></Button>
+  </ActionItem>
+</ActionBar>
+
+<GridLayout>
+  <ScrollView>
+      <StackLayout>
+          <app-weather-card [forecast]="forecast" *ngFor="let forecast of forecasts"></app-weather-card>
+      </StackLayout>
+  </ScrollView>
+  <app-city-picker #cityPicker (closePicker)="hidePicker()"></app-city-picker>
+  <app-spinner [isBusy]="isBusy"></app-spinner>
+</GridLayout>

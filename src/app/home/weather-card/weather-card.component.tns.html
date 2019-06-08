@@ -1,0 +1,27 @@
+<GridLayout rows="auto,auto,*" columns="auto,*,*" class="p-20" style="margin:20 20 10 20;background-color:#DDD;height:350;">
+  <StackLayout colSpan="3" col="0" row="0" class="m-b-10 weather-forecast">
+      <Label text="{{ forecast.label }}" class="h1 location"></Label>
+      <Label text="{{ forecast.currently.time * 1000 | date }}"></Label>
+      <Label text="{{ forecast.currently.summary }}"></Label>
+  </StackLayout>
+  <Label class="ion text-center m-r-10" [text]="forecast.currently.icon | weatherIcon | fonticon" style="font-size:78;" col="0" row="1"></Label>
+  <Label text="{{ forecast.currently.temperature | number:'1.0-0' }}º" class="h1" style="font-size:60;" col="1" row="1"></Label>
+  <StackLayout col="2" row="1" style="font-size:14;vertical-align:middle;">
+      <Label text="Humidity: {{ forecast.currently.humidity * 100 | number:'1.0-0' }}%"></Label>
+      <Label text="Wind: {{ forecast.currently.windSpeed | number:'1.0-0' }} mph {{ forecast.currently.windBearing }}º"></Label>
+      <Label text="Sunrise: {{ forecast.daily.data[0].sunriseTime * 1000 | date:'shortTime' }}"></Label>
+      <Label text="Sunset: {{ forecast.daily.data[0].sunsetTime * 1000 | date:'shortTime' }}"></Label>
+  </StackLayout>
+  <StackLayout colSpan="3" col="0" row="2" class="m-t-20 text-center">
+      <ScrollView orientation="horizontal">
+          <StackLayout orientation="horizontal" style="horizontal-align:center;">
+              <GridLayout rows="*,*,*,*" *ngFor="let daily of forecast.daily.data | slice:1:7; let i=index" class="m-r-20">
+                  <Label [text]="daily.time * 1000 | date:'EEE'"></Label>
+                  <Label class="ion h1" [text]="daily.icon | weatherIcon | fonticon" row="1"></Label>
+                  <Label text="{{ daily.temperatureHigh | number:'1.0-0' }}º" row="2"></Label>
+                  <Label text="{{ daily.temperatureLow | number:'1.0-0' }}º" row="3" class="text-muted"></Label>
+              </GridLayout>
+          </StackLayout>
+      </ScrollView>
+  </StackLayout>
+</GridLayout>

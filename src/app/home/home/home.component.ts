@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityPickerComponent } from '../city-picker/city-picker.component';
-import { ForecastService } from 'src/app/forecast.service';
+import { ForecastService } from '../../forecast.service';
 
 @Component({
   selector: 'app-home',

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { CacheService } from './cache.service';
 
 @Injectable({ providedIn: 'root' })
 export class ForecastService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private cacheSvc: CacheService) { }
 
   /*
  * Gets a forecast for a specific city and updates the card with the data.
@@ -15,17 +16,26 @@ export class ForecastService {
  */
   getForecast(key, label): Promise<any> {
     const params = new HttpParams()
-       .set('exclude', 'flags,alerts,hourly,minutely');
+      .set('exclude', 'flags,alerts,hourly,minutely');
 
     const url = `http://localhost:8000/forecast/${key}`;
 
     // TODO add cache logic here
+
     return new Promise((resolve, reject) => {
-      this.httpClient.get(url, { params })
-        .toPromise()
+      this.cacheSvc.checkCache(url + '?' + params.toString(), key, label)
+        .then(results => {
+          if (results) {
+            resolve(results); // Return cached response first
+          }
+          return this.httpClient.get(url, { params })
+            .toPromise()
+            .then((results: any) => {
+              return this.cacheSvc.cacheResponse(url + params.toString(), results);
+          })
+        })
         .then((results: any) => {
-          console.log('WEATHER RESULTS', results);
-          const response = results;
+          let response = results;
           response.key = key;
           response.label = label;
           response.created = results.currently.time;
@@ -33,10 +43,9 @@ export class ForecastService {
           resolve(response);
         })
         .catch(err => {
-          console.warn('Forecast HTTP Error', err);
+          console.warn("Forecast HTTP Error", err);
           reject();
-        });
-
+        })
     });
   }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { DialogHelper } from './dialog-helper';
 
 @Component({
   selector: 'app-city-picker',
   templateUrl: './city-picker.component.html',
   styleUrls: ['./city-picker.component.scss'],
-  providers: []
+  providers: [ DialogHelper ]
 })
 export class CityPickerComponent implements OnInit {
   @Output() closePicker: EventEmitter<any> = new EventEmitter();
@@ -24,17 +25,17 @@ export class CityPickerComponent implements OnInit {
     {id: '47.6038,-122.3301', title: 'Seattle, WA'}
   ];
 
-  constructor() { }
+  constructor(private dialogHelper: DialogHelper) { }
 
   ngOnInit() {
   }
 
   show() {
-    this.isVisible = true;
+    this.isVisible = this.dialogHelper.show(this.dialogContainer);
   }
 
   hide() {
-    this.isVisible = false;
+    this.isVisible = this.dialogHelper.hide();
     this.closePicker.emit();
   }
 
