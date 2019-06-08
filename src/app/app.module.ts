@@ -1,13 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { sharedProviders } from './app.common';
 
 
 
@@ -17,13 +15,11 @@ import { sharedProviders } from './app.common';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [
-    ...sharedProviders
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

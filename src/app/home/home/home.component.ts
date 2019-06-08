@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityPickerComponent } from '../city-picker/city-picker.component';
-import { ForecastService } from '../../forecast.service';
+import { ForecastService } from 'src/app/forecast.service';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +8,15 @@ import { ForecastService } from '../../forecast.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isBusy: boolean;
+  title: string = 'Weather App';
+  forecasts: Array<any>;
+  cities: Array<any>;
 
   constructor(public forecastSvc: ForecastService) {
     this.forecasts = new Array<any>();
+    this.forecasts.push(this.initialWeatherForecast);
   }
-
-  isBusy: boolean;
-  title = 'Weather Forecast';
-  forecasts: Array<any>;
-  cities: Array<any>;
 
   ngOnInit() {
     this.isBusy = true;
@@ -42,9 +42,7 @@ export class HomeComponent implements OnInit {
       ];
 
       // Save default city on first load
-      if (localStorage !== undefined){
-        localStorage.setItem('selectedCities', JSON.stringify(this.cities));
-      }
+      localStorage.setItem('selectedCities', JSON.stringify(this.cities));
     }
 
     // Using timeout to address race condition with activity indicator in {N}
@@ -55,7 +53,7 @@ export class HomeComponent implements OnInit {
   refreshForecast() {
     // TODO: Get forecasts from Yahoo API
     this.isBusy = true;
-    const p = new Array<Promise<any>>();
+    let p = new Array<Promise<any>>();
 
     this.cities.forEach(city => {
       p.push(this.forecastSvc.getForecast(city.key, city.label));
@@ -67,9 +65,83 @@ export class HomeComponent implements OnInit {
         this.isBusy = false;
       })
       .catch(err => {
-        console.warn('ERROR refreshing forecasts', err);
+        console.warn("ERROR refreshing forecasts", err);
         this.isBusy = false;
       });
   }
+
+  /*
+   * Fake weather data that is presented when the user first uses the app,
+   * or when the user has not saved any cities. See startup code for more
+   * discussion.
+   */
+// tslint:disable-next-line: member-ordering
+ initialWeatherForecast = {
+    'latitude': 40.7720232,
+    'longitude': -73.9732319,
+    'timezone': 'America/New_York',
+    'label': 'New York',
+    'currently': {
+        'time': 1559936200,
+        'summary': 'Partly Cloudy',
+        'icon': 'partly-cloudy-day',
+        'temperature': 80.71,
+        'humidity': 0.45,
+        'windSpeed': 2.14,
+        'windBearing': 116
+    },
+    'daily': {
+        'data': [
+            {
+                'time': 1559880000,
+                'icon': 'partly-cloudy-day',
+                'temperatureHigh': 80.79,
+                'temperatureLow': 65.28
+            },
+            {
+                'time': 1559966400,
+                'icon': 'partly-cloudy-day',
+                'temperatureHigh': 82.48,
+                'temperatureLow': 61.54
+            },
+            {
+                'time': 1560052800,
+                'icon': 'partly-cloudy-day',
+                'temperatureHigh': 78.49,
+                'temperatureLow': 60.36
+            },
+            {
+                'time': 1560139200,
+                'icon': 'rain',
+                'temperatureHigh': 73.87,
+                'temperatureLow': 70.4
+            },
+            {
+                'time': 1560225600,
+                'icon': 'rain',
+                'temperatureHigh': 78.15,
+                'temperatureLow': 63.37
+            },
+            {
+                'time': 1560312000,
+                'icon': 'cloudy',
+                'temperatureHigh': 78.51,
+                'temperatureLow': 61.07
+            },
+            {
+                'time': 1560398400,
+                'icon': 'rain',
+                'temperatureHigh': 76.23,
+                'temperatureLow': 67.15
+            },
+            {
+                'time': 1560484800,
+                'icon': 'partly-cloudy-day',
+                'temperatureHigh': 80.53,
+                'temperatureLow': 62.2
+            }
+        ]
+    }
+};
 
 }

@@ -2,22 +2,12 @@
   "name": "ns-pwa-weather",
   "version": "0.0.0",
   "scripts": {
-    "android": "tns run android --bundle",
-    "ios": "tns run ios --bundle",
-    "mobile": "tns run --bundle",
-    "preview": "tns preview --bundle",
     "ng": "ng",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "start": "concurrently \"npm run serve-api\" \"npm run serve\"",
-    "serve": "ng serve",
-    "serve-api": "node server.js"
-  },
-  "main": "server.js",
-  "engines": {
-    "node": "8.x"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -31,32 +21,19 @@
     "@angular/pwa": "^0.800.2",
     "@angular/router": "~7.1.0",
     "@angular/service-worker": "~7.1.0",
-    "@nativescript/schematics": "^0.6.0",
-    "concurrently": "^4.1.0",
     "core-js": "^2.5.4",
-    "dotenv": "^8.0.0",
-    "express": "^4.16.4",
-    "express-http-to-https": "^1.1.4",
-    "nativescript-angular": "~7.2.0",
-    "nativescript-localstorage": "^2.0.0",
-    "nativescript-theme-core": "~1.0.4",
-    "node-fetch": "^2.3.0",
-    "reflect-metadata": "~0.1.12",
     "rxjs": "~6.3.3",
-    "tns-core-modules": "~5.4.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "nativescript-dev-webpack": "^0.20.0",
-    "@nativescript/schematics": "~0.4.0",
     "@angular-devkit/build-angular": "~0.11.0",
     "@angular/cli": "~7.1.0",
     "@angular/compiler-cli": "~7.1.0",
     "@angular/language-service": "~7.1.0",
+    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^8.9.5",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -69,11 +46,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
-  },
-  "nativescript": {
-    "id": "org.nativescript.ngsample",
-    "tns-ios": {
-      "version": "5.4.1"
-    }
   }
 }

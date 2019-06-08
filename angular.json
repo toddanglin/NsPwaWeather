@@ -91,7 +91,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.json"
+              "src/manifest.webmanifest"
             ]
           }
         },
@@ -138,8 +138,5 @@
       }
     }
   },
-  "defaultProject": "NsPwaWeather",
-  "cli": {
-    "defaultCollection": "@nativescript/schematics"
-  }
+  "defaultProject": "NsPwaWeather"
 }
